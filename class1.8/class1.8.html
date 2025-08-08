@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div><table border="1">
+       <thead>
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Delete</th>
+            <th>Edit</th>
+        </tr>
+       </thead>
+       
+       <tbody id="tbody"> 
+       </tbody>
+
+           <!-- <tr> -->
+               <!-- <td>1</td> -->
+               <!-- <td>eli lang</td> -->
+           <!-- </tr> -->
+           <!-- <tr> -->
+            <!-- <td>2</td> -->
+            <!-- <td>ariel</td> -->
+
+        <!-- </tr> -->
+
+         <label><input id="idInput" type="hidden"></label> 
+
+        <label><input id="nameInput" placeholder="Enter name"></label>
+        <button onclick="addPerson()">add</button>
+
+        <script>
+            function addPerson() {
+                // let id = Number(document.getElementById("idInput").value);
+                //  if(isNaN(id)){
+                //      alert("Invalid ID");
+                //      return;
+                //  }
+                let id = nextId++;
+                let name = document.getElementById("nameInput").value;
+
+                let newPerson = { id, name };
+                persons.push(newPerson);
+                    console.log(persons);
+                    creatTable(persons);
+                    
+
+                }
+
+            
+
+            let persons = [
+                { id: 1, name: 'Eli' },
+                { id: 2, name: 'Ariel' },
+                { id: 3, name: 'Yosi' }
+            ];
+               nextId = persons.length + 1;
+
+           function creatTable(persons) {
+             let txt ="";
+            for( obj of persons){
+
+                txt+="<tr>";
+               
+
+                   for( k in obj){
+                       txt+=`<td>${obj[k]}</td>`;
+                   }
+                      
+                        txt+=`<td><button onclick="deleteRow(${obj.id})">Delete</button></td> 
+                    
+                     <td><button onclick="updateRow(${obj.id})">update</button></td>`;
+                        txt+=`<td><button onclick="editRow(${obj.id})">edit</button></td>`;
+            }
+
+
+            document.getElementById("tbody").innerHTML=txt;
+
+
+           }
+
+
+           function deleteRow(id) {
+
+                 console.log(id);
+            persons = persons.filter(obj => obj.id != id);
+
+
+               creatTable(persons);
+            }   
+// נא ליצור עמודה נוספת עם כפתור עריכה לכל אובייקט.
+
+// כאשר נלחץ על כפתור העריכה - שם האובייקט יכנס אל תוך האינפוט "Name" שבראש הדף.
+            function updateRow(id) {
+                let person = persons.find(obj => obj.id === id);
+               document.getElementById("nameInput").value = person.name;
+               document.getElementById("idInput").value = person.id;
+
+              
+
+
+            }
+        function editRow(id){
+            let id =document.getElementById("idInput").value;
+            let name = document.getElementById("nameInput").value;
+            let person = persons.find(obj => obj.id === id);
+            person.name = name;
+            
+
+            creatTable(persons);
+        }
+        // create or edit
+        function create(){
+            let id = document.getElementById("idInput").value;
+            if(id){
+                // update
+                editRow(id);
+            } else {
+                // create
+                addPerson();
+            }
+           document.getElementById("idInput").value = '';
+           document.getElementById("nameInput").value = '';
+
+        } 
+           creatTable(persons);
+          
+           
+           
+           </script>
+    </table>
+       
+       
+       
+       
+    </div>
+</body>
+</html>
