@@ -19,7 +19,7 @@ function createTableRow(data) {
     let txt ="";
     for(obj of data){
         txt+="<tr>"
-        txt+=`<td><button>Delete</button></td>`
+        txt+=`<td><button onclick="deleteContact(${obj.id})">Delete</button></td>`
         for(k in obj){
             txt+=`<td>${obj[k]}</td>`;
         }
@@ -27,7 +27,16 @@ function createTableRow(data) {
         txt+="</tr>";
     }
     document.getElementById("contact-list").innerHTML = txt;
-}// add contact
+
+}
+function deleteContact(id) {
+    contacts =JSON.parse(localStorage.getItem('contacts'));
+    contacts = contacts.filter(contact => contact.id !== id);
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+    createTableRow(contacts);
+}
+
+// add contact
 function addContact() {
   let id= JSON.parse(localStorage.getItem('nextId'));
   let name = document.getElementById("AddName").value;
