@@ -6,12 +6,24 @@
     <title>Document</title>
 </head>
 <body>
-    <input id="AddContact" type="hidden">
-    <input type="text" id="AddEmail" placeholder="Add name">
-    <input type="text" id="AddPhone" placeholder="Add email">
-    <input type="text" id="AddID" placeholder="Add phone">
-
-    <button id="AddButton">send</button>
+    <div>
+        <label for="AddID">ID</label>
+        <input type="text" name="AddID" id="AddID">
+        <br>
+        <label for="AddName">Name</label>
+        <input type="text" name="AddName" id="AddName">
+        <br>
+        <label for="AddEmail">Email</label>
+        <input type="text" name="AddEmail" id="AddEmail">
+        <br>
+        <label for="AddPhone">Phone</label>
+        <input type="text" name="AddPhone" id="AddPhone">
+        <button onclick="addContact()" id="AddContact">Add</button>
+    </div>
+    <div>
+        <label for="SearchID">Search by ID</label>
+        <input type="text" name="SearchID" id="SearchID">
+        <button onclick="" id="SearchContact">Search</button>
 
 
     <table border="1">

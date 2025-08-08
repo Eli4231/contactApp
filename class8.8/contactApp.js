@@ -4,9 +4,16 @@
 // ]
 
 
-localStorage.setItem('contactApp', JSON.stringify([{id:1,name:'Eli',email:'el@example.com',phone:'123-456-7890'}]))
+// localStorage.setItem('contactApp', JSON.stringify([{id:1,name:'Eli',email:'el@example.com',phone:'123-456-7890'}]))
 
+let contacts = JSON.parse(localStorage.getItem('contacts'));
 
+if(contacts ==null){
+    localStorage.setItem('contacts', JSON.stringify([]));
+};
+if(contacts.length == 0) {
+    localStorage.setItem('nextId', JSON.stringify(1));   // If there are no contacts, display a message or handle accordingly
+}
 
 function createTableRow(data) {
     let txt ="";
@@ -20,15 +27,29 @@ function createTableRow(data) {
         txt+="</tr>";
     }
     document.getElementById("contact-list").innerHTML = txt;
+}// add contact
+function addContact() {
+  let id= JSON.parse(localStorage.getItem('nextId'));
+  let name = document.getElementById("AddName").value;
+  let email = document.getElementById("AddEmail").value;
+  let phone = document.getElementById("AddPhone").value;
+  let obj ={
+      id: id,
+      name: name,
+      email: email,
+      phone: phone
+  }
+  contacts.push(obj);
+  console.log(obj);
+
+  localStorage.setItem('contacts', JSON.stringify(contacts));
+  createTableRow(contacts);
+    document.getElementById("AddName").value="";
+    document.getElementById("AddEmail").value="";
+    document.getElementById("AddPhone").value="";
+    localStorage.setItem('nextId', JSON.stringify(id + 1));
+
 }
 
-function addContact(data) {
-    let contacts = JSON.parse(localStorage.getItem('contactApp')) || [];
-    contacts.push(data);
-    localStorage.setItem('contactApp', JSON.stringify(contacts));
-    createTableRow(contacts);
 
-}
-
-let contacts = JSON.parse(localStorage.getItem('contactApp'));
 createTableRow(contacts);
