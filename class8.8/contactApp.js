@@ -24,20 +24,13 @@ function createTableRow(data) {
         for(k in obj){
             txt+=`<td>${obj[k]}</td>`;
         }
-        txt+=`<td><button onclick="editContact(${obj.id})">Edit</button></td>`;
-        txt+=`<td><button onclick="updateContact(${obj.id})">Update</button></td>`;
+        txt+=`<td><button onclick="editToContact(${obj.id})">Edit</button></td>`;
         txt+="</tr>";
     }
     document.getElementById("contact-list").innerHTML = txt;
 
 }
-// delete contact
-function deleteContact(id) {
-    contacts =JSON.parse(localStorage.getItem('contacts'));
-    contacts = contacts.filter(contact => contact.id !== id);
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-    createTableRow(contacts);
-}
+
 
 // add contact
 function addContact() {
@@ -61,14 +54,55 @@ function addContact() {
 
 }
 
-function updateContact(id) {
+// delete contact
+function deleteContact(id) {
+    contacts =JSON.parse(localStorage.getItem('contacts'));
+    contacts = contacts.filter(contact => contact.id !== id);
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+    createTableRow(contacts);
+}
+
+//update contect
+function editToContact(id) {
   contacts = JSON.parse(localStorage.getItem('contacts'));
   let contact = contacts.find(contact => contact.id === id);
-  if (contact) {
+  
+      document.getElementById("id").value= contact.id
       document.getElementById("AddName").value = contact.name;
       document.getElementById("AddEmail").value = contact.email;
       document.getElementById("AddPhone").value = contact.phone;
-  }
+  
 }
+function editContact(){
+    let id =document.getElementById('id').value;
+    let name =document.getElementById("AddName").value;
+    let email =document.getElementById("AddEmail").value;
+    let phone =document.getElementById("AddPhone").value;
+    let obj=contacts.find(contact=>contact.id==id);
+    obj.name=name;
+    obj.email=email;
+    obj.phone=phone;
+    localStorage.setItem("contacts",JSON.stringify(contacts));
+    createTableRow(contacts)
+}
+function createOrEdit(){
+    let id= document.getElementById("id").value;
+    if(id){
+        editContact()
+    }else{
+        addContact()
+    }
+}
+function search(){
+    let find = document.getElementById("search").value.toLowerCase();
+    let filterd =contacts.filter(contact=>{
+         return contact.name.toLowerCase().includes(find) ||
+               contact.email.toLowerCase().includes(find) ||
+               contact.phone.toLowerCase().includes(find);
+    })
+    createTableRow(filterd);
+}
+
+
 
     createTableRow(contacts);
