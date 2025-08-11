@@ -7,7 +7,7 @@
 // localStorage.setItem('contactApp', JSON.stringify([{id:1,name:'Eli',email:'el@example.com',phone:'123-456-7890'}]))
 
 let contacts = JSON.parse(localStorage.getItem('contacts'));
-
+let nextId;
 if(contacts ==null){
     localStorage.setItem('contacts', JSON.stringify([]));
 };
@@ -15,6 +15,7 @@ if(contacts.length == 0) {
     localStorage.setItem('nextId', JSON.stringify(1));   // If there are no contacts, display a message or handle accordingly
 }
 
+// Create table rows for displaying contacts
 function createTableRow(data) {
     let txt ="";
     for(obj of data){
@@ -23,12 +24,14 @@ function createTableRow(data) {
         for(k in obj){
             txt+=`<td>${obj[k]}</td>`;
         }
-        txt+="<td><button>Edit</button></td>";
+        txt+=`<td><button onclick="editContact(${obj.id})">Edit</button></td>`;
+        txt+=`<td><button onclick="updateContact(${obj.id})">Update</button></td>`;
         txt+="</tr>";
     }
     document.getElementById("contact-list").innerHTML = txt;
 
 }
+// delete contact
 function deleteContact(id) {
     contacts =JSON.parse(localStorage.getItem('contacts'));
     contacts = contacts.filter(contact => contact.id !== id);
@@ -49,8 +52,6 @@ function addContact() {
       phone: phone
   }
   contacts.push(obj);
-  console.log(obj);
-
   localStorage.setItem('contacts', JSON.stringify(contacts));
   createTableRow(contacts);
     document.getElementById("AddName").value="";
@@ -60,5 +61,14 @@ function addContact() {
 
 }
 
+function updateContact(id) {
+  contacts = JSON.parse(localStorage.getItem('contacts'));
+  let contact = contacts.find(contact => contact.id === id);
+  if (contact) {
+      document.getElementById("AddName").value = contact.name;
+      document.getElementById("AddEmail").value = contact.email;
+      document.getElementById("AddPhone").value = contact.phone;
+  }
+}
 
-createTableRow(contacts);
+    createTableRow(contacts);
