@@ -1,0 +1,106 @@
+/* עיצוב כללי לדף */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* עיצוב הקונטיינר של הטופס */
+div:first-of-type {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* עיצוב לייבלים ושדות */
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* עיצוב כפתור ההוספה */
+#AddContact {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#AddContact:hover {
+    background-color: #218838;
+}
+
+/* עיצוב שדה החיפוש */
+#search {
+    margin-left: 15px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* עיצוב הטבלה */
+table {
+    border-collapse: collapse;
+    width: 80%;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* עיצוב כפתורי מחיקה ועריכה */
+button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[onclick^="deleteContact"] {
+    background-color: #dc3545;
+    color: white;
+}
+
+button[onclick^="deleteContact"]:hover {
+    background-color: #c82333;
+}
+
+button[onclick^="editToContact"] {
+    background-color: #ffc107;
+    color: black;
+}
+
+button[onclick^="editToContact"]:hover {
+    background-color: #e0a800;
+}

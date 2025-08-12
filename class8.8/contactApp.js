@@ -93,6 +93,7 @@ function createOrEdit(){
         addContact()
     }
 }
+// sort מטלה
 function search(){
     let find = document.getElementById("search").value.toLowerCase();
     let filterd =contacts.filter(contact=>{
