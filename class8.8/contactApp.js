@@ -84,6 +84,11 @@ function editContact(){
     obj.phone=phone;
     localStorage.setItem("contacts",JSON.stringify(contacts));
     createTableRow(contacts)
+    document.getElementById("id").value = "";
+    document.getElementById("AddName").value = "";
+    document.getElementById("AddEmail").value = "";
+    document.getElementById("AddPhone").value = "";
+
 }
 function createOrEdit(){
     let id= document.getElementById("id").value;
